@@ -72,13 +72,14 @@ class WhatsAppService {
           console.log('4. Scan the QR code below:');
           console.log('═══════════════════════════════════════════════════════');
           console.log('\n');
-          console.log('QR CODE (Terminal):');
+          console.log('QR CODE (Terminal - may have formatting issues in logs):');
           qrcode.generate(qr, { small: false });
           console.log('\n');
           console.log('═══════════════════════════════════════════════════════');
-          console.log('💡 TIP: If QR code is not scannable, visit:');
-          console.log('   /api/qr-code (in your browser)');
-          console.log('   Or check the web endpoint for QR image');
+          console.log('💡 IMPORTANT: If QR code above is not scannable,');
+          console.log('   Visit this URL in your browser for scannable QR:');
+          console.log('   https://your-backend-url.onrender.com/api/qr-image');
+          console.log('   (Replace with your actual Render backend URL)');
           console.log('═══════════════════════════════════════════════════════');
           console.log('Waiting for QR code scan...');
           console.log('═══════════════════════════════════════════════════════');
