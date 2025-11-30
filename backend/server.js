@@ -24,6 +24,53 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: 'WhatsApp Quiz Bot API is running' });
 });
 
+// QR Code endpoint - Get QR code data
+app.get('/api/qr-code', (req, res) => {
+  const whatsappService = app.locals.whatsappService;
+  if (!whatsappService) {
+    return res.status(503).json({ error: 'WhatsApp service not initialized' });
+  }
+
+  const qrData = whatsappService.getQRCode();
+  if (!qrData.qr) {
+    return res.json({ 
+      message: 'No QR code available. WhatsApp may already be connected.',
+      connected: whatsappService.isConnected 
+    });
+  }
+
+  res.json({
+    qr: qrData.qr,
+    imageUrl: qrData.imageUrl,
+    instructions: [
+      '1. Open WhatsApp Business on your phone',
+      '2. Go to Settings → Linked Devices',
+      '3. Tap "Link a Device"',
+      '4. Scan the QR code image below or visit /api/qr-image'
+    ]
+  });
+});
+
+// QR Code image endpoint - Get QR code as PNG image
+app.get('/api/qr-image', async (req, res) => {
+  const whatsappService = app.locals.whatsappService;
+  if (!whatsappService) {
+    return res.status(503).send('WhatsApp service not initialized');
+  }
+
+  const qrData = whatsappService.getQRCode();
+  if (!qrData.imageUrl) {
+    return res.status(404).send('QR code not available. WhatsApp may already be connected.');
+  }
+
+  // Convert data URL to image
+  const base64Data = qrData.imageUrl.replace(/^data:image\/png;base64,/, '');
+  const imageBuffer = Buffer.from(base64Data, 'base64');
+  
+  res.setHeader('Content-Type', 'image/png');
+  res.send(imageBuffer);
+});
+
 // Initialize database and start server
 async function startServer() {
   try {

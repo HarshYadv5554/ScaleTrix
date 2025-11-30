@@ -6,6 +6,7 @@ import {
 } from '@whiskeysockets/baileys';
 import pino from 'pino';
 import qrcode from 'qrcode-terminal';
+import QRCode from 'qrcode';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -27,6 +28,8 @@ class WhatsAppService {
   constructor() {
     this.sock = null;
     this.isConnected = false;
+    this.currentQR = null;
+    this.qrImageUrl = null;
   }
 
   async initialize() {
@@ -50,6 +53,15 @@ class WhatsAppService {
         const { connection, lastDisconnect, qr } = update;
 
         if (qr) {
+          this.currentQR = qr;
+          
+          // Generate QR code image URL for web access
+          QRCode.toDataURL(qr).then(url => {
+            this.qrImageUrl = url;
+          }).catch(err => {
+            console.error('Error generating QR image:', err);
+          });
+
           console.log('\n');
           console.log('═══════════════════════════════════════════════════════');
           console.log('📱 SCAN THIS QR CODE WITH YOUR WHATSAPP BUSINESS:');
@@ -60,8 +72,13 @@ class WhatsAppService {
           console.log('4. Scan the QR code below:');
           console.log('═══════════════════════════════════════════════════════');
           console.log('\n');
-          qrcode.generate(qr, { small: true });
+          console.log('QR CODE (Terminal):');
+          qrcode.generate(qr, { small: false });
           console.log('\n');
+          console.log('═══════════════════════════════════════════════════════');
+          console.log('💡 TIP: If QR code is not scannable, visit:');
+          console.log('   /api/qr-code (in your browser)');
+          console.log('   Or check the web endpoint for QR image');
           console.log('═══════════════════════════════════════════════════════');
           console.log('Waiting for QR code scan...');
           console.log('═══════════════════════════════════════════════════════');
@@ -317,6 +334,14 @@ class WhatsAppService {
   async cleanupInactiveSessions() {
     // In production, implement timeout logic
     // For now, sessions are managed per user
+  }
+
+  // Get current QR code
+  getQRCode() {
+    return {
+      qr: this.currentQR,
+      imageUrl: this.qrImageUrl
+    };
   }
 }
 
