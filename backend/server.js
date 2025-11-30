@@ -1,12 +1,18 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 import { initializeDatabase } from './config/database.js';
 import apiRoutes from './routes/api.js';
 import WhatsAppService from './services/whatsappService.js';
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -15,6 +21,9 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Serve static files (QR code HTML page)
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use('/api', apiRoutes);
@@ -89,6 +98,8 @@ async function startServer() {
       console.log(`🚀 Server running on port ${PORT}`);
       console.log(`📊 Admin panel: http://localhost:${PORT}`);
       console.log(`🔗 API: http://localhost:${PORT}/api`);
+      console.log(`📱 QR Code Scanner: http://localhost:${PORT}/qr.html`);
+      console.log(`📱 QR Code Image: http://localhost:${PORT}/api/qr-image`);
     });
   } catch (error) {
     console.error('❌ Failed to start server:', error);
