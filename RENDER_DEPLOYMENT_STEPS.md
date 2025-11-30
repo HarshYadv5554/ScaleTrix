@@ -82,12 +82,27 @@
 ## Step 3: Connect WhatsApp
 
 1. **Go to Backend Service** → **Logs** tab
-2. **Look for QR code** in the logs
+2. **Get QR Code** - You have 3 options:
+   
+   **Option A: Web Page (Recommended - Best Quality)**
+   - Visit: `https://your-backend-url.onrender.com/qr.html`
+   - (Replace `your-backend-url` with your actual Render backend URL)
+   - This displays a scannable QR code in your browser
+   
+   **Option B: Direct Image URL**
+   - Visit: `https://your-backend-url.onrender.com/api/qr-image`
+   - Shows the QR code as a PNG image
+   
+   **Option C: Logs (May have formatting issues)**
+   - Check backend logs in Render dashboard
+   - QR code may appear with spaces/formatting issues
+   - If not scannable, use Option A or B
+
 3. **Scan QR code** with WhatsApp Business (9991943266):
-   - Open WhatsApp Business
-   - Settings → Linked Devices
-   - Link a Device
-   - Scan the QR code from logs
+   - Open WhatsApp Business on your phone
+   - Go to Settings → Linked Devices
+   - Tap "Link a Device"
+   - Scan the QR code from the web page (Option A) or image (Option B)
 4. **Wait for**: "✅ WhatsApp connected successfully!" in logs
 
 ---
