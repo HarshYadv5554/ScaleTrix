@@ -161,6 +161,3 @@ npm run build
 - Verify `REACT_APP_API_URL` environment variable
 - Check browser console for errors
 
-## License
-
-MIT License
