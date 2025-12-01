@@ -144,6 +144,12 @@ npm run build
 - `GET /api/export/csv` - Export data as CSV
 - `GET /api/export/json` - Export data as JSON
 
+## Recommendation Logic (How it works)
+
+Behind the scenes, each answer you give is scored against all available packages (Starter, Basic, Advanced, Standard, Professional, Premium, Enterprise, Ultimate).  
+For every question, your choice (A/B/C) adds a small number of points to each package based on things like home size, budget, monitoring needs, and installation preference.  
+At the end of the quiz, the system simply picks the package with the highest total score and returns that as your personalized recommendation, along with a short explanation and feature list.
+
 ## Tech Stack
 
 **Backend:** Node.js, Express, Baileys, PostgreSQL  
