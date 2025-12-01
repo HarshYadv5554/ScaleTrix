@@ -130,6 +130,7 @@ npm run build
 
 ## Deployed URLs
 
+- **Backend Base URL**: [`https://whatsapp-quiz-backendd.onrender.com/`](https://whatsapp-quiz-backendd.onrender.com/)
 - **Backend QR Page**: [`https://whatsapp-quiz-backendd.onrender.com/qr.html`](https://whatsapp-quiz-backendd.onrender.com/qr.html)
 - **Frontend Admin Panel**: [`https://whatsapp-quiz-frontendd.onrender.com/`](https://whatsapp-quiz-frontendd.onrender.com/)
 
