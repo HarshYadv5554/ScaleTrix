@@ -128,6 +128,11 @@ npm run build
    - **Recommendations**: See all product recommendations
    - **Analytics**: Detailed event tracking
 
+## Deployed URLs
+
+- **Backend QR Page**: [`https://whatsapp-quiz-backendd.onrender.com/qr.html`](https://whatsapp-quiz-backendd.onrender.com/qr.html)
+- **Frontend Admin Panel**: [`https://whatsapp-quiz-frontendd.onrender.com/`](https://whatsapp-quiz-frontendd.onrender.com/)
+
 ## API Endpoints
 
 - `GET /api/sessions` - Get all sessions
