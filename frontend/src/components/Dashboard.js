@@ -44,11 +44,6 @@ function Dashboard() {
     count: parseInt(item.count)
   }));
 
-  const questionData = stats.questionStats.map(item => ({
-    question: item.event_type.replace('question_', 'Q').replace('_answered', ''),
-    count: parseInt(item.count)
-  }));
-
   return (
     <div>
       <div className="stats-grid">
@@ -94,20 +89,6 @@ function Dashboard() {
             </Pie>
             <Tooltip />
           </PieChart>
-        </ResponsiveContainer>
-      </div>
-
-      <div className="card">
-        <h2>Question Completion Rates</h2>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={questionData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="question" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="count" fill="#667eea" />
-          </BarChart>
         </ResponsiveContainer>
       </div>
 
