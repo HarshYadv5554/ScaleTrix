@@ -2,50 +2,30 @@
 
 A full-stack WhatsApp automation system that guides users through a personalized home security quiz via WhatsApp, generates tailored recommendations, and tracks engagement analytics.
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 whatsapp-quiz-bot/
 ├── frontend/          # React Admin Panel
 ├── backend/           # Express Server + Baileys WhatsApp Integration
 ├── database/          # PostgreSQL Schema
-├── analytics/        # Drop-off tracking logic
-└── README.md
+└── analytics/         # Drop-off tracking logic
 ```
 
-## 🚀 Features
+## Features
 
-### 1. WhatsApp Quiz Bot
-- ✅ Baileys WhatsApp integration
-- ✅ Interactive 6-question quiz flow
-- ✅ Real-time conversation handling
-- ✅ Session management
+- WhatsApp Quiz Bot: Interactive 6-question quiz flow with Baileys integration
+- Recommendation Engine: Personalized product recommendations (Basic, Standard, Premium)
+- Analytics Tracking: Quiz completion rates, drop-off points, and engagement metrics
+- Admin Panel: Dashboard with metrics, session management, and data export
 
-### 2. Recommendation Engine
-- ✅ Personalized product recommendations based on user answers
-- ✅ Three product tiers: Basic, Standard, Premium
-- ✅ Scoring algorithm for optimal matching
-
-### 3. Analytics Tracking
-- ✅ Quiz start/completion tracking
-- ✅ Question-by-question analytics
-- ✅ Drop-off point detection
-- ✅ Completion rate calculations
-
-### 4. Admin Panel
-- ✅ Dashboard with key metrics
-- ✅ Session management
-- ✅ Recommendations overview
-- ✅ Analytics visualization
-- ✅ Data export (CSV/JSON)
-
-## 📋 Prerequisites
+## Prerequisites
 
 - Node.js (v16 or higher)
-- PostgreSQL database (Neon free tier)
+- PostgreSQL database
 - WhatsApp account for testing
 
-## 🛠️ Installation
+## Installation
 
 ### 1. Clone the repository
 
@@ -57,23 +37,19 @@ cd whatsapp-quiz-bot
 ### 2. Install dependencies
 
 ```bash
-# Install root dependencies
-npm install
-
-# Install backend dependencies
-cd backend
-npm install
-
-# Install frontend dependencies
-cd ../frontend
-npm install
+# Install all dependencies
+npm run install-all
 ```
 
-### 3. Database Setup
+Or install separately:
 
-The database schema will be automatically initialized when the server starts. Make sure your PostgreSQL connection string is set in the `.env` file.
+```bash
+npm install
+cd backend && npm install
+cd ../frontend && npm install
+```
 
-### 4. Environment Configuration
+### 3. Environment Configuration
 
 Create a `.env` file in the `backend/` directory:
 
@@ -84,45 +60,49 @@ WHATSAPP_NUMBER=your-phone-number
 NODE_ENV=development
 ```
 
-## 🚀 Running the Application
+### 4. Database Setup
+
+The database schema will be automatically initialized when the server starts. Ensure your PostgreSQL connection string is set in the `.env` file.
+
+## Running the Application
 
 ### Development Mode
 
-#### Option 1: Run separately
+**Option 1: Run together (from root)**
+```bash
+npm run dev
+```
 
-**Terminal 1 - Backend:**
+**Option 2: Run separately**
+
+Terminal 1 - Backend:
 ```bash
 cd backend
 npm run dev
 ```
 
-**Terminal 2 - Frontend:**
+Terminal 2 - Frontend:
 ```bash
 cd frontend
 npm start
 ```
 
-#### Option 2: Run together (from root)
-```bash
-npm run dev
-```
-
 ### Production Mode
 
-**Backend:**
+Backend:
 ```bash
 cd backend
 npm start
 ```
 
-**Frontend:**
+Frontend:
 ```bash
 cd frontend
 npm run build
 # Serve the build folder with a static server
 ```
 
-## 📱 WhatsApp Setup
+## WhatsApp Setup
 
 1. Start the backend server
 2. A QR code will appear in the terminal
@@ -131,7 +111,7 @@ npm run build
 5. Tap "Link a Device" and scan the QR code
 6. The bot is now ready to receive messages!
 
-## 🎯 Usage
+## Usage
 
 ### For Users (WhatsApp)
 
@@ -148,165 +128,39 @@ npm run build
    - **Recommendations**: See all product recommendations
    - **Analytics**: Detailed event tracking
 
-## 📊 Quiz Questions
+## API Endpoints
 
-The quiz asks 6 questions about:
-1. Home size
-2. Primary security concern
-3. Remote monitoring needs
-4. Budget range
-5. Professional monitoring preference
-6. Installation preference
-
-## 🎁 Product Recommendations
-
-### SecureHome Basic Package ($299.99)
-- For small homes (1-2 bedrooms)
-- Essential security features
-- DIY installation
-
-### SecureHome Standard Package ($899.99)
-- For medium homes (3-4 bedrooms)
-- Comprehensive protection
-- Mobile app with live view
-
-### SecureHome Premium Package ($1999.99)
-- For large properties (5+ bedrooms)
-- Full-featured system
-- Professional monitoring included
-
-## 📈 Analytics Events
-
-The system tracks:
-- `quiz_started`: When a user begins the quiz
-- `question_{n}_answered`: Each question answered
-- `quiz_completed`: Successful completion
-- `dropped_off_after_question_{n}`: Abandonment points
-
-## 🔌 API Endpoints
-
-### Sessions
 - `GET /api/sessions` - Get all sessions
 - `GET /api/sessions/:id` - Get session details
-
-### Recommendations
 - `GET /api/recommendations` - Get all recommendations
-
-### Analytics
 - `GET /api/analytics/stats` - Get analytics statistics
 - `GET /api/analytics/events` - Get analytics events
-
-### Export
 - `GET /api/export/csv` - Export data as CSV
 - `GET /api/export/json` - Export data as JSON
 
-## 🚢 Deployment
+## Tech Stack
 
-### Render Deployment
+**Backend:** Node.js, Express, Baileys, PostgreSQL  
+**Frontend:** React, Recharts, Axios  
+**Database:** PostgreSQL
 
-1. **Backend Deployment:**
-   - Connect your GitHub repository
-   - Set build command: `cd backend && npm install`
-   - Set start command: `cd backend && npm start`
-   - Add environment variables:
-     - `DATABASE_URL`
-     - `PORT` (optional, defaults to 3001)
-     - `NODE_ENV=production`
+## Troubleshooting
 
-2. **Frontend Deployment:**
-   - Connect your GitHub repository
-   - Set build command: `cd frontend && npm install && npm run build`
-   - Set publish directory: `frontend/build`
-   - Add environment variable:
-     - `REACT_APP_API_URL` (your backend URL)
-
-3. **Database:**
-   - Use Neon PostgreSQL (already configured)
-   - Ensure connection string is in backend `.env`
-
-## 🛠️ Tech Stack
-
-### Backend
-- **Node.js** - Runtime
-- **Express** - Web framework
-- **Baileys** - WhatsApp Web API
-- **PostgreSQL** - Database (via Neon)
-- **pg** - PostgreSQL client
-
-### Frontend
-- **React** - UI framework
-- **Recharts** - Data visualization
-- **Axios** - HTTP client
-
-### Database
-- **PostgreSQL** (Neon free tier)
-
-## 📁 Project Structure
-
-```
-whatsapp-quiz-bot/
-├── backend/
-│   ├── config/
-│   │   └── database.js          # Database configuration
-│   ├── models/
-│   │   ├── User.js               # User model
-│   │   ├── QuizSession.js        # Session model
-│   │   ├── QuizResponse.js       # Response model
-│   │   ├── Recommendation.js     # Recommendation model
-│   │   └── Analytics.js          # Analytics model
-│   ├── routes/
-│   │   └── api.js                # API routes
-│   ├── services/
-│   │   ├── whatsappService.js    # WhatsApp bot logic
-│   │   └── quizService.js        # Quiz questions & recommendations
-│   ├── server.js                 # Express server
-│   └── package.json
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── Dashboard.js      # Main dashboard
-│   │   │   ├── Sessions.js       # Sessions view
-│   │   │   ├── Recommendations.js # Recommendations view
-│   │   │   └── Analytics.js      # Analytics view
-│   │   ├── App.js                # Main app component
-│   │   └── index.js
-│   └── package.json
-├── database/
-│   └── schema.sql                # Database schema
-├── analytics/
-│   └── dropoffTracker.js         # Drop-off tracking logic
-└── README.md
-```
-
-## 🐛 Troubleshooting
-
-### WhatsApp Connection Issues
+**WhatsApp Connection Issues:**
 - Ensure QR code is scanned within the timeout period
 - Check if WhatsApp Web is already connected on another device
 - Delete `backend/auth_info_baileys/` folder and restart
 
-### Database Connection Issues
+**Database Connection Issues:**
 - Verify `DATABASE_URL` in `.env` file
-- Check if Neon database is active
+- Check if database is active
 - Ensure SSL mode is enabled
 
-### Frontend Not Loading
+**Frontend Not Loading:**
 - Check if backend is running on port 3001
 - Verify `REACT_APP_API_URL` environment variable
 - Check browser console for errors
 
-## 📝 License
+## License
 
 MIT License
-
-## 👤 Author
-
-Built for ScaleTrix Assignment
-
-## 🙏 Acknowledgments
-
-- Baileys for WhatsApp integration
-- Neon for free PostgreSQL hosting
-- Render for deployment platform
-

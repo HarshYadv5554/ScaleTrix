@@ -7,7 +7,7 @@ import Recommendation from '../models/Recommendation.js';
 import Analytics from '../models/Analytics.js';
 import User from '../models/User.js';
 
-// Get all quiz sessions
+// Get all sessions
 router.get('/sessions', async (req, res) => {
   try {
     const sessions = await QuizSession.getAll();

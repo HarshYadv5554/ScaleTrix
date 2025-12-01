@@ -3,7 +3,7 @@ import { pool } from '../config/database.js';
 class User {
   static async findOrCreate(phoneNumber, name = null) {
     try {
-      // Try to find existing user
+      // finding existing user
       const findResult = await pool.query(
         'SELECT * FROM users WHERE phone_number = $1',
         [phoneNumber]

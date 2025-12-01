@@ -2,9 +2,9 @@ import Analytics from '../models/Analytics.js';
 
 class DropoffTracker {
   /**
-   * Track when a user drops off at a specific question
+   * when a user drops off at a specific question
    * @param {number} sessionId - The quiz session ID
-   * @param {number} userId - The user ID
+   * @param {number} userId 
    * @param {number} questionNumber - The question number where user dropped off
    */
   static async trackDropoff(sessionId, userId, questionNumber) {
@@ -24,7 +24,7 @@ class DropoffTracker {
   }
 
   /**
-   * Track when a user answers a question
+   * when a user answers a question
    * @param {number} sessionId - The quiz session ID
    * @param {number} userId - The user ID
    * @param {number} questionNumber - The question number answered
@@ -46,9 +46,9 @@ class DropoffTracker {
   }
 
   /**
-   * Track when a quiz is started
-   * @param {number} sessionId - The quiz session ID
-   * @param {number} userId - The user ID
+   * when a quiz is started
+   * @param {number} sessionId 
+   * @param {number} userId 
    */
   static async trackQuizStarted(sessionId, userId) {
     try {
@@ -66,9 +66,9 @@ class DropoffTracker {
   }
 
   /**
-   * Track when a quiz is completed
-   * @param {number} sessionId - The quiz session ID
-   * @param {number} userId - The user ID
+   * when a quiz is completed
+   * @param {number} sessionId 
+   * @param {number} userId 
    */
   static async trackQuizCompleted(sessionId, userId) {
     try {

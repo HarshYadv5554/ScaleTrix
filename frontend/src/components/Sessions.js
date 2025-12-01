@@ -11,7 +11,7 @@ function Sessions() {
 
   useEffect(() => {
     fetchSessions();
-    const interval = setInterval(fetchSessions, 10000); // Refresh every 10 seconds
+    const interval = setInterval(fetchSessions, 10000); // Refresh every 10 secs
     return () => clearInterval(interval);
   }, []);
 
